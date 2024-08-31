@@ -5,6 +5,90 @@
         <script src="./code.js"></script>
     </head>
     <body>
-        
+        <table>
+            <tr>
+                <td>
+                    <select id="sl_lv6type">
+                        <option value="county">Huyện</option>
+                        <option value="city">Thành phố</option>
+                        <option value="subcity">Thị xã</option>
+                        <option value="district">Quận</option>
+                    </select>
+                </td>
+                <td>
+                    <input type="text" id="txt_lv6name" style="width:150px;">
+                </td>
+                <td>
+                    <select id="sl_lv4type">
+                        <option value="prov">Tỉnh</option>
+                        <option value="city">Thành phố</option>
+                    </select>
+                </td>
+                <td>
+                    <input type="text" id="txt_lv4name" style="width:100%;">
+                </td>
+            </tr>
+            <tr>
+                <td>Map width: </td>
+                <td>
+                    <input type="text" id="txt_mapwidth" style="width:150px;" value="450">
+                </td>
+                <td>Image width: </td>
+                <td>
+                    <input type="text" id="txt_imagewidth" style="width:100%;">
+                </td>
+            </tr>
+            <tr>
+                <td>Image name: </td>
+                <td>
+                    <input type="text" id="txt_imagename" style="width:150px;">
+                </td>
+                <td colspan="2">
+                    <table style="width:100%;">
+                        <tr>
+                            <td>
+                                <input type="button" id="btt_addtype1" value="+ type 1" style="width: 100%;">
+                            </td>
+                            <td>
+                                <input type="button" id="btt_addtype2" value="+ type 2" style="width: 100%;">
+                            </td>
+                            <td>
+                                <input type="button" id="btt_addtype3" value="+ type 3" style="width: 100%;">
+                            </td>
+                            <td>
+                                <input type="button" id="btt_addtype0" value="+ type 0" style="width: 100%;">
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    + type 1, + type 2, + type 3: nếu ô huyện/quận trống thì<br>
+                    type 1 là thêm Thành phố/Quận, 2 là thêm Thị xã, 3 là thêm Huyện.<br>
+                    Nếu ô huyện/quận không trống thì<br>
+                    type 1 là thêm Phường, 2 là thêm Thị trấn, 3 là thêm Xã.<br>
+                    + type 0: dành cho các mục địa danh lân cận.
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <table style="width: 100%;" id="tab_listitem">
+                        <tr style="text-align: center;">
+                            <th style="width: 50px;">Type</th>
+                            <th>Name</th>
+                            <th style="width: 100px;">x-image</th>
+                            <th style="width: 100px;">y-image</th>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" style="text-align: center;">
+                    <input type="button" id="btt_reset" value="Reset">
+                    <input type="button" id="btt_generate" value="Generate code">
+                </td>
+            </tr>
+        </table>
     </body>
 </html>
