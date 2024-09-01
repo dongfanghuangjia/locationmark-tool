@@ -9,10 +9,10 @@
             <tr>
                 <td>
                     <select id="sl_lv6type">
-                        <option value="county">Huyện</option>
-                        <option value="city">Thành phố</option>
-                        <option value="subcity">Thị xã</option>
-                        <option value="district">Quận</option>
+                        <option value="huyện">Huyện</option>
+                        <option value="thành phố">Thành phố</option>
+                        <option value="thị xã">Thị xã</option>
+                        <option value="quận">Quận</option>
                     </select>
                 </td>
                 <td>
@@ -20,8 +20,8 @@
                 </td>
                 <td>
                     <select id="sl_lv4type">
-                        <option value="prov">Tỉnh</option>
-                        <option value="city">Thành phố</option>
+                        <option value="tỉnh">Tỉnh</option>
+                        <option value="thành phố">Thành phố</option>
                     </select>
                 </td>
                 <td>
@@ -35,7 +35,7 @@
                 </td>
                 <td>Image width: </td>
                 <td>
-                    <input type="number" id="txt_imagewidth" style="width:100%;" min="0">
+                    <input type="number" id="txt_imagewidth" style="width:100%;" value="3000" min="0">
                 </td>
             </tr>
             <tr>
@@ -45,7 +45,7 @@
                 </td>
                 <td colspan="2">
                     <input type="button" value="Reset above information" 
-                    onclick="btt_resetabove_onclick()">
+                    onclick="btt_resetabove_click()">
                 </td>
             </tr>
             <!--<tr>
@@ -63,17 +63,31 @@
                 </td>
             </tr>-->
             <tr>
+                <td>
+                    Wiki link <br>code:
+                </td>
+                <td colspan="3">
+                    <textarea id="txt_wikilink" rows="6" style="width: 100%;"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" style="text-align: left;">
+                    <input type="button" id="btt_addsubitem" value="+1 sub-item"
+                    onclick="btt_addsubitem_click()">
+                    <input type="button" id="btt_generate" value="Generate code"
+                    onclick="btt_generate_click()">
+                    <input type="button" id="btt_reset" value="Reset all items" 
+                    onclick="btt_reset_click()">
+                </td>
+            </tr>
+            <tr>
                 <td colspan="4">
                     <div id="subitem_list"></div>
                 </td>
             </tr>
             <tr>
-                <td colspan="4" style="text-align: center;">
-                    <input type="button" id="btt_addsubitem" value="+1 sub-item"
-                    onclick="btt_addsubitem_onclick()">
-                    <input type="button" id="btt_reset" value="Reset" 
-                    onclick="btt_reset_onclick()">
-                    <input type="button" id="btt_generate" value="Generate code">
+                <td colspan="4">
+                    <div id="wiki_code"></div>
                 </td>
             </tr>
         </table>

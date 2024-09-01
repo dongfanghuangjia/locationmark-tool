@@ -1,4 +1,4 @@
-const btt_resetabove_onclick = () => {
+const btt_resetabove_click = () => {
     document.getElementById("txt_lv4name").value = '';
     document.getElementById("txt_lv6name").value = '';
     document.getElementById("txt_mapwidth").value = '450';
@@ -7,7 +7,7 @@ const btt_resetabove_onclick = () => {
 }
 var isubitem = 0;
 var ctp_index = 0;
-const btt_addsubitem_onclick = () => {
+const btt_addsubitem_click = () => {
     var subitem_list = document.getElementById("subitem_list");
     isubitem++;
     // Index
@@ -19,7 +19,7 @@ const btt_addsubitem_onclick = () => {
     var cbb_itype = document.createElement("select");
     cbb_itype.id = "cbb_itype" + isubitem;
     cbb_itype.style = "width: 50px;";
-    cbb_itype.addEventListener("click", cbb_itype_onchange);
+    cbb_itype.addEventListener("change", cbb_itype_onchange);
     for(i=0;i<4;i++) {
         var opt_type = document.createElement("option");
         opt_type.value = i;
@@ -37,14 +37,14 @@ const btt_addsubitem_onclick = () => {
     // Textbox x-image
     var nmb_iximg = document.createElement("input");
     nmb_iximg.type = "number";
-    nmb_iximg.id = "nmb_iximg" + isubitem;
+    nmb_iximg.id = "txt_iximg" + isubitem;
     nmb_iximg.style = "width: 80px;";
     nmb_iximg.min = "0";
     subitem_list.appendChild(nmb_iximg);
     // Textbox y-image
     var nmb_iyimg = document.createElement("input");
     nmb_iyimg.type = "number";
-    nmb_iyimg.id = "nmb_iyimg" + isubitem;
+    nmb_iyimg.id = "txt_iyimg" + isubitem;
     nmb_iyimg.style = "width: 80px;";
     nmb_iyimg.min = "0";
     subitem_list.appendChild(nmb_iyimg);
@@ -53,7 +53,65 @@ const btt_addsubitem_onclick = () => {
 const cbb_itype_onchange = () => {
     ctp_index = document.getElementById("cbb_itype" + isubitem).value;
 }
-const btt_reset_onclick = () => {
+var arrWikilink = [];
+const btt_generate_click = () => {
+    var tWikilink = document.getElementById("txt_wikilink").value;
+    var tickOpen = 0, tickClose = 0,  tickSep = 0;
+    arrWikilink = [];
+    for(var i=0;i<tWikilink.length - 1;i++) {
+        if(tWikilink.substr(i,2) == "[[") tickOpen = i;
+        if(tWikilink.substr(i,1) == "|") tickSep = i;
+        if(tWikilink.substr(i,2) == "]]") {
+            tickClose = i;
+            if(tickSep != -1) {
+                arrWikilink.push(new Array(tWikilink.substr(tickOpen + 2, tickSep - tickOpen -2),
+                tWikilink.substr(tickSep + 1, tickClose - tickSep - 1)));
+            }
+            else {
+                arrWikilink.push(new Array(tWikilink.substr(tickOpen + 2, tickClose - tickOpen - 2),
+                tWikilink.substr(tickOpen + 2, tickClose - tickOpen - 2)));
+            }
+            tickSep = -1;
+        }
+    }
+    var tWikicode = "";
+    tWikicode += "{|style=\"border:1px #aaa solid;background:#f8f9fa;\"\n|\n<center>\n";
+    tWikicode += "{{Location mark+\n";
+    tWikicode += "| width=" + document.getElementById("txt_mapwidth").value + "\n";
+    tWikicode += "| image=" + document.getElementById("txt_imagename").value + "_admin_map.jpg" + '\n';
+    var objlvname;
+    if(document.getElementById("txt_lv6name").value == "") {
+        objlvname = document.getElementById("sl_lv4type").value + " " +
+        document.getElementById("txt_lv4name").value;
+    }
+    else {
+        objlvname = document.getElementById("sl_lv6type").value + " " +
+        document.getElementById("txt_lv6name").value + " " + 
+        document.getElementById("sl_lv4type").value + " " +
+        document.getElementById("txt_lv4name").value;
+    }
+    tWikicode += "| caption=Bản đồ hành chính " + objlvname + "\n";
+    tWikicode += "| type=\n| float=none" + '\n' + "| marks=\n";
+    for(var i=0; i<isubitem; i++) {
+
+    }
+    tWikicode += "}}\n";
+    objlvname = "";
+    if(document.getElementById("txt_lv6name").value == "") {
+        objlvname = document.getElementById("sl_lv4type").value + " " +
+        document.getElementById("txt_lv4name").value;
+    }
+    else {
+        objlvname = document.getElementById("sl_lv6type").value + " " +
+        document.getElementById("txt_lv6name").value + " " + 
+        document.getElementById("sl_lv4type").value + " {{colored link|black|" +
+        document.getElementById("txt_lv4name").value + "}}";
+    }
+    tWikicode += "{{resize|Bản đồ hành chính " + objlvname + "}}\n";
+    tWikicode += "</center>\n|}";
+    document.getElementById("wiki_code").innerText = tWikicode;
+}
+const btt_reset_click = () => {
     isubitem = 0;
     document.getElementById("subitem_list").innerText = "";
 }
