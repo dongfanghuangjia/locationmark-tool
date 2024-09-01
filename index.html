@@ -31,11 +31,11 @@
             <tr>
                 <td>Map width: </td>
                 <td>
-                    <input type="text" id="txt_mapwidth" style="width:150px;" value="450">
+                    <input type="number" id="txt_mapwidth" style="width:150px;" value="450" min="0">
                 </td>
                 <td>Image width: </td>
                 <td>
-                    <input type="text" id="txt_imagewidth" style="width:100%;">
+                    <input type="number" id="txt_imagewidth" style="width:100%;" min="0">
                 </td>
             </tr>
             <tr>
@@ -44,48 +44,35 @@
                     <input type="text" id="txt_imagename" style="width:150px;">
                 </td>
                 <td colspan="2">
-                    <table style="width:100%;">
-                        <tr>
-                            <td>
-                                <input type="button" id="btt_addtype1" value="+ type 1" style="width: 100%;">
-                            </td>
-                            <td>
-                                <input type="button" id="btt_addtype2" value="+ type 2" style="width: 100%;">
-                            </td>
-                            <td>
-                                <input type="button" id="btt_addtype3" value="+ type 3" style="width: 100%;">
-                            </td>
-                            <td>
-                                <input type="button" id="btt_addtype0" value="+ type 0" style="width: 100%;">
-                            </td>
-                        </tr>
-                    </table>
+                    <input type="button" value="Reset above information" 
+                    onclick="btt_resetabove_onclick()">
                 </td>
             </tr>
-            <tr>
+            <!--<tr>
                 <td colspan="4">
+                    <b>Counter type 1: <label id="t1_counter">0</label>, 
+                    type 2: <label id="t2_counter">0</label>,
+                    type 3: <label id="t3_counter">0</label>,
+                    type 0: <label id="t0_counter">0</label>.</b>
+                    <br>
                     + type 1, + type 2, + type 3: nếu ô huyện/quận trống thì<br>
                     type 1 là thêm Thành phố/Quận, 2 là thêm Thị xã, 3 là thêm Huyện.<br>
                     Nếu ô huyện/quận không trống thì<br>
                     type 1 là thêm Phường, 2 là thêm Thị trấn, 3 là thêm Xã.<br>
                     + type 0: dành cho các mục địa danh lân cận.
                 </td>
-            </tr>
+            </tr>-->
             <tr>
                 <td colspan="4">
-                    <table style="width: 100%;" id="tab_listitem">
-                        <tr style="text-align: center;">
-                            <th style="width: 50px;">Type</th>
-                            <th>Name</th>
-                            <th style="width: 100px;">x-image</th>
-                            <th style="width: 100px;">y-image</th>
-                        </tr>
-                    </table>
+                    <div id="subitem_list"></div>
                 </td>
             </tr>
             <tr>
                 <td colspan="4" style="text-align: center;">
-                    <input type="button" id="btt_reset" value="Reset">
+                    <input type="button" id="btt_addsubitem" value="+1 sub-item"
+                    onclick="btt_addsubitem_onclick()">
+                    <input type="button" id="btt_reset" value="Reset" 
+                    onclick="btt_reset_onclick()">
                     <input type="button" id="btt_generate" value="Generate code">
                 </td>
             </tr>
