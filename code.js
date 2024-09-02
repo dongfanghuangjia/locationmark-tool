@@ -92,8 +92,59 @@ const btt_generate_click = () => {
     }
     tWikicode += "| caption=Bản đồ hành chính " + objlvname + "\n";
     tWikicode += "| type=\n| float=none" + '\n' + "| marks=\n";
-    for(var i=0; i<isubitem; i++) {
-
+    for(var i=1; i<isubitem+1; i++) {
+        if(document.getElementById("txt_iname" + i.toString()).value != "") {
+            var itype, iname, ilink, iximg, iyimg, ixmap, iymap;
+            itype= document.getElementById("cbb_itype" + i.toString()).value;
+            iname = document.getElementById("txt_iname" + i.toString()).value;
+            iximg = document.getElementById("txt_iximg" + i.toString()).value;
+            iximg = (iximg == "") ? 0 : iximg;
+            iyimg = document.getElementById("txt_iyimg" + i.toString()).value;
+            iyimg = (iyimg == "") ? 0 : iyimg;
+            ilink = "";
+            var lv6name = document.getElementById("txt_lv6name").value;
+            var lv4type = document.getElementById("sl_lv4type").value;
+            for(var j=0; j<arrWikilink.length; j++) {
+                if(arrWikilink[j][1] == iname) {
+                    ilink = arrWikilink[j][0];
+                    arrWikilink[j][1]="!!!";
+                    break;
+                }
+            }
+            var imgWidth = document.getElementById("txt_imagewidth").value;
+            ixmap = Math.round(iximg * 1000 / imgWidth);
+            iymap = Math.round(iyimg * 1000 / imgWidth + 30);
+            tWikicode += "{{Location mark~\n";
+            var iTick = "";
+            if(itype == 1) {
+                iTick = "'''";
+                if(lv6name == "") {
+                    if(lv4type == "tỉnh") iname = "TP. " + iname;
+                    else iname = "Q. " + iname;
+                }
+                else iname = "P. " + iname;
+            }
+            else if(itype == 2) {
+                iTick = "'''''";
+                if(lv6name == "") iname = "TX. " + iname;
+                else iname = "TT. " + iname;
+            }
+            else if(itype == 3) {
+                iTick = "''";
+                if(lv6name == "") iname = "H. " + iname;
+                else iname = "X. " + iname;
+            }
+            tWikicode += "| label=" + iTick;
+            if(ilink == "") tWikicode += iname;
+            else if(ilink == iname) tWikicode += "{{colored link|black|" + iname + "}}";
+            else tWikicode += "colored link|black|" + ilink + "|" + iname + "}}";
+            tWikicode += iTick + "\n";
+            tWikicode += "|position=top\n";
+            tWikicode += "|width=" + document.getElementById("txt_mapwidth").value + "\n";
+            tWikicode += "| mark=Blanksvg.svg\n";
+            tWikicode += "| x=" + ixmap.toString();
+            tWikicode += " | y=" + iymap.toString() + " }}\n";
+        }
     }
     tWikicode += "}}\n";
     objlvname = "";
